@@ -1,0 +1,12 @@
+(program
+ (classes
+  (class A extends Object
+   (fields)
+   (methods
+    (method A self () this)
+    (method Num x () 5)
+   )
+  )
+ )
+ 54
+)

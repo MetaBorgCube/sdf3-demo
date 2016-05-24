@@ -1,0 +1,67 @@
+(program
+ (classes
+  (class Node extends Object
+   (fields
+    (Num id)
+    (EdgeList edges)
+   )
+   (methods
+   )
+  )
+  (class NodeList extends Object
+   (fields
+    (Node head)
+    (NodeList tail)
+    (Bool hasValue)
+    (Bool hasNext)
+   )
+   (methods
+    (method Node add ((Node n))
+     (if (get this hasValue)
+         (let ((NodeList newTail (new NodeList)))
+          (do
+           (set newTail head (get this head))
+           (set newTail hasNext (get this hasNext))
+           (set this tail newTail)
+           (set this hasNext true)
+           (set this hasValue true)
+           (set this head n)
+          )
+         )
+         (do
+          (set this hasValue true)
+          (set this head n)
+         )
+     )
+    )
+    (method Bool contains ((Node n))
+     (if (num= (get n id) (get (get this head) id))
+         true
+         (if (not (get this hasNext))
+ false
+ (call (get this tail) contains n)
+         )
+     )
+    )
+   )
+  )
+ )
+ (let
+  (
+   (Node n1 (new Node))
+   (Node n2 (new Node))
+   (Node n3 (new Node))
+   (NodeList list (new NodeList))
+  ) 
+  (do
+   (set n1 id 1)
+   (set n2 id 2)
+   (set n3 id 3)
+   (call list add n1)
+   (call list add n2)
+   (call list contains n1)
+   (call list contains n2)
+   (call list contains n3)
+  )
+ )
+)

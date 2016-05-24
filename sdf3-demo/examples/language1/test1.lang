@@ -1,0 +1,19 @@
+(program
+ (classes
+  (class A extends Object
+   (fields
+    (Num a)
+    (A b)
+   )
+   (methods)
+  )
+  (class B extends A
+   (fields
+    (Num a)
+    (A b)
+   )
+   (methods)
+  )
+ )
+ 54
+)

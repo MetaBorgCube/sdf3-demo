@@ -1,0 +1,15 @@
+program
+
+class [[ClassName]] extends [[ClassName]] {
+}
+
+class B extends [[ClassName]] {
+   Num a
+	   A b
+	    B b
+   B [[MethodName]]() {
+	   [[Expr]] + [[Expr]] == true 
+	   }
+}
+ 
+run 54

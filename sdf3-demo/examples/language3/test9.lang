@@ -1,0 +1,18 @@
+program
+
+class A extends Object {
+   A id(A a) {
+     a
+   }
+
+   Num x(Num y) {
+     5
+   }
+
+   Num x2(Num y, Num z) {
+     5
+   }
+}
+
+run
+  54

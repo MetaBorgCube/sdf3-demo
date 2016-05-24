@@ -1,0 +1,14 @@
+program
+
+class A extends Object {
+   Num double(Num i) {
+     i * 2
+   }
+
+   Num quadruple(Num i) {
+     this.double(this.double(i))
+   }
+}
+
+run
+  new A.quadruple(6)

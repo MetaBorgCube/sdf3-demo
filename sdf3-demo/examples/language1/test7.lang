@@ -1,0 +1,1 @@
+(program (classes) (let ((Num a 5)) (let ((Num b 8)) (* a b))))

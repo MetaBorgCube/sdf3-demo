@@ -1,0 +1,7 @@
+program
+
+
+run
+  let Num a = let Num b = 3 + 4 in b + 1
+   in let Num b = 8
+    in a * b

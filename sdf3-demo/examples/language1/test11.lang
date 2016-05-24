@@ -1,0 +1,12 @@
+(program
+ (classes
+  (class A extends Object
+   (fields)
+   (methods
+    (method Num double ((Num i)) (* i 2))
+    (method Num quadruple ((Num i)) (call this double (call this double i)))
+   )
+  )
+ )
+ (call (new A) quadruple 6)
+)

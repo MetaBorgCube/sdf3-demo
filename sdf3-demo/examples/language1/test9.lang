@@ -1,0 +1,13 @@
+(program
+ (classes
+  (class A extends Object
+   (fields)
+   (methods
+    (method A id ((A a)) a)
+    (method Num x ((Num y)) 5)
+    (method Num x2 ((Num y) (Num z)) 5)
+   )
+  )
+ )
+ 54
+)

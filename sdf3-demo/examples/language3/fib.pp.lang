@@ -1,0 +1,42 @@
+program
+
+class Fib extends Object {
+   Num value Fib next
+   Fib initialize(Num n) {
+     if(n == 0)
+       this
+     else
+       {
+         this.next = new Fib;
+         this.next.initialize(n - 1)
+       }
+   }
+
+   Num calculate(Num n) {
+     if(n == 1)
+       1
+     else
+       let Fib nplus1 = this.next
+           Fib nplus2 = this.next.next
+        in {
+          nplus2.value = this.value + nplus1.value;
+          nplus1.calculate(n - 1)
+        }
+   }
+
+   Num getValue(Num n) {
+     if(n == 0)
+       this.value
+     else
+       this.next.getValue(n - 1)
+   }
+}
+
+run
+  let Fib fib = new Fib
+   in {
+     fib.initialize(10);
+     fib.next.value = 1;
+     fib.calculate(10);
+     fib.getValue(10)
+   }

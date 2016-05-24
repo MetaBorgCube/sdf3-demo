@@ -1,0 +1,14 @@
+program
+
+class A extends Object {
+   A self() {
+     this
+   }
+
+   Num x() {
+     5
+   }
+}
+
+run
+  54

@@ -1,0 +1,42 @@
+module pp
+
+imports
+
+  libstratego-gpp
+  runtime/refactoring/-
+  pp/sdf_demo-parenthesize
+  pp/sdf_demo-pp
+
+rules
+
+  editor-format:
+    (node, _, ast, path, project-path) -> (filename, result)
+    with
+      ext      := <get-extension> path
+    ; filename := <guarantee-extension(|$[pp.[ext]])> path
+    ; result   := <pp-debug> node
+
+rules
+  
+  pp-sdf_demo-string =
+    parenthesize-sdf_demo
+    ; prettyprint-sdf_demo-start-symbols
+    ; !V([], <id>)
+    ; box2text-string(|120)
+      
+  pp-partial-sdf_demo-string =
+    parenthesize-sdf_demo
+    ; prettyprint-sdf_demo
+    ; !V([], <id>)
+    ; box2text-string(|120)
+      
+  pp-debug :
+    ast -> result
+    with
+       result := <pp-sdf_demo-string> ast
+    <+ <bottomup(try(not(is-string); not(is-list); not(pp-sdf_demo-string); debug(!"cannot pp ")))> ast
+    ;  result := ""
+
+rules
+  
+  construct-textual-change = construct-textual-change(pp-partial-sdf_demo-string, parenthesize, override-reconstruction, resugar)

@@ -1,0 +1,24 @@
+module Small
+
+lexical syntax
+
+  INT = "-"? [0-9]+ 
+  LAYOUT = [\ \t\n\r] 
+  
+context-free syntax
+
+  Expr       = [([Expr])] {bracket}
+  Expr.Num   = INT 
+  Expr.Add   = [[Expr] + [Expr]] {left}
+  Expr.Mul   = [[Expr] * [Expr]] {left} 
+
+context-free priorities
+
+  Expr.Mul > Expr.Add
+  
+context-free restrictions
+
+  // Ensure greedy matching for comments
+  
+  LAYOUT? -/- [\ \t\n\r]
+  

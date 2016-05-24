@@ -1,0 +1,74 @@
+module Language1
+
+imports Common 
+
+context-free start-symbols Start
+
+context-free syntax
+  
+  Start = Program
+  
+  Program.Program = [(program (classes [Class*]) [Expr])]
+
+  Class.Class = [
+    (class [ClassName] extends [ClassName]
+       (fields [Field*])
+       (methods [Method*])
+    )
+  ]
+
+  Field.Field = [([Type] [FieldName])]
+
+  Method.Method = 
+    	[(method [Type] [MethodName] ([Param*]) [Expr])]
+  	
+  Param.Param = [([Type] [Var])]
+
+  Expr.True  = [true]
+  Expr.False = [false]
+  Expr.Num   = INT
+  Expr.Var   = Var
+  Expr.Min   = [(- [Expr])]
+  Expr.Not   = [(not [Expr])]
+  Expr.Add   = [(+ [Expr] [Expr])]
+  Expr.Mul   = [(* [Expr] [Expr])]
+  Expr.Sub   = [(- [Expr] [Expr])]
+  Expr.And   = [(and [Expr] [Expr])]
+  Expr.Or    = [(or [Expr] [Expr])]
+  Expr.Eq    = [(num= [Expr] [Expr])]
+  Expr.If    = [(if [Expr] [Expr] [Expr])]
+  Expr.Do    = [(do [Expr*])]
+  Expr.Let   = [(let ([Bind*]) [Expr])]
+  Bind.Bind  = [([Type] [Var] [Expr])]
+    
+  Expr.Get   = [(get [Expr] [FieldName])]
+  Expr.Set   = [(set [Expr] [FieldName] [Expr])]
+  Expr.Call  = [(call [Expr] [MethodName] [Expr*])]
+
+  Expr.New   = [(new [ClassName])]
+  Expr.This  = [this]
+  Expr.Null  = [(null [ClassName])]
+
+  Type.NumT   = [Num]
+  Type.BoolT  = [Bool]
+  Type.ClassT = ClassName
+    
+  Var        = SID
+  ClassName  = SID
+  FieldName  = SID
+  MethodName = SID
+  
+  ClassName = [Num] {reject}
+  ClassName = [Bool] {reject}
+  Var       = [true] {reject}
+  Var       = [false] {reject}
+  Var       = [this] {reject}
+
+lexical syntax
+
+  SID = [A-Za-z][A-Za-z0-9\_\-]*
+  
+lexical restrictions
+
+  SID -/- [A-Za-z0-9\_\-]
+  

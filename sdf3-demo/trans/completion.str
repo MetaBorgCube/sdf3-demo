@@ -1,0 +1,13 @@
+module completion
+
+imports
+  
+  runtime/completion/-
+  completion/sdf_demo-cp
+  pp
+  pp/sdf_demo-parenthesize
+  
+rules
+  
+  pp-completion = pp-partial-sdf_demo-string
+  parenthesize-completion = parenthesize-sdf_demo

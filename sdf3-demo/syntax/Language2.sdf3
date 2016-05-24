@@ -1,0 +1,82 @@
+module Language2
+
+imports Common
+
+context-free start-symbols Start
+
+context-free syntax
+  
+  Start = Program
+  
+  Program.Program = [
+    program 
+      [{Class "\n\n"}*] 
+    run [Expr]
+ ]
+
+  Class.Class = [
+    class [ClassName] extends [ClassName] { 
+      [{Field "\n"}*] 
+      
+      [{Method "\n"}*] 
+    }
+  ]
+
+  Field.Field = [[Type] [FieldName]]
+
+  Method.Method = 
+  	  [[Type] [MethodName] ([{Param ","}*]) { [Expr] }]
+  	
+  Param.Param = [[Type] [VarName]]
+  
+//  Expr       = [([Expr])] {bracket}
+//  Expr.True  = [true]
+//  Expr.False = [false]
+//  Expr.Num   = INT
+//  Expr.Var   = VarName
+//  Expr.Min   = [- [Expr]]
+//  Expr.Not   = [not [Expr]]
+//  Expr.Add   = [[Expr] + [Expr]]
+//  Expr.Mul   = [[Expr] * [Expr]]
+//  Expr.Sub   = [[Expr] - [Expr]]
+//  Expr.And   = [[Expr] and [Expr]]
+//  Expr.Or    = [[Expr] or [Expr]]
+//  Expr.Eq    = [[Expr] == [Expr]]
+//  Expr.If    = [if([Expr]) [Expr] else [Expr]]
+//  Expr.Do    = [{ [{Expr ";"}*] }]
+
+  Expr.Let   = [let [Bind*] in [Expr]]
+  Bind.Bind  = [[Type] [VarName] = [Expr]]
+      
+  Expr.Get   = [[Expr].[FieldName]]
+  Expr.Set   = [[Expr].[FieldName] = [Expr]]
+  Expr.Call  = [[Expr].[MethodName]([{Expr ","}*])]
+
+  Expr.New   = [new [ClassName]]
+  Expr.This  = [this]
+  Expr.Null  = [null [ClassName]]
+  
+  Expr        = Term
+  Term.Add   = [[Term] + [Factor]]
+  Term        = Factor
+  Factor.Mul = [[Factor] * [Base]]
+  Factor      = Base
+  Base.Paren = [([Expr])] 
+  Base.Num   = INT
+  Base.Var   = VarName
+
+  Type.NumT   = [Num]
+  Type.BoolT  = [Bool]
+  Type.ClassT = ClassName
+    
+  VarName    = ID
+  ClassName  = ID
+  FieldName  = ID
+  MethodName = ID
+  
+  // ClassName = [Num] {reject}
+  // ClassName = [Bool] {reject}
+  // VarName   = [true] {reject}
+  // VarName   = [false] {reject}
+  // VarName   = [this] {reject}
+  // VarName   = [new] {reject}

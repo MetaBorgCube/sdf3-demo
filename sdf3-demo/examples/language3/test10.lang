@@ -1,0 +1,16 @@
+program
+
+class A extends Object {
+   A overriding(A in) {
+     this
+   }
+}
+
+class B extends A {
+   A overriding(A in) {
+     this
+   }
+}
+
+run
+  42

@@ -1,0 +1,7 @@
+program
+
+
+run
+  let Num a = 5
+   in let Num b = 8
+    in a * b

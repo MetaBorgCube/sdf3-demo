@@ -1,0 +1,56 @@
+(program
+ (classes
+  (class Node extends Object
+   (fields
+   )
+   (methods
+    (method Num sum ()
+     0
+    )
+   )
+  )
+  (class Leaf extends Node
+   (fields
+    (Num value)
+   )
+   (methods
+    (method Num sum ()
+     (get this value)
+    )
+   )
+  )
+  (class Parent extends Node
+   (fields
+    (Node child1)
+    (Node child2)
+   )
+   (methods
+    (method Num sum ()
+     (+
+      (call (get this child1) sum)
+      (call (get this child2) sum)
+     )
+    )
+   )
+  )
+ )
+ (let
+  (
+   (Parent p1 (new Parent))
+   (Parent p2 (new Parent))
+   (Leaf l1 (new Leaf))
+   (Leaf l2 (new Leaf))
+   (Leaf l3 (new Leaf))
+  ) 
+  (do
+   (set p1 child1 p2)
+   (set p1 child2 l1)
+   (set p2 child1 l2)
+   (set p2 child2 l3)
+   (set l1 value 3)
+   (set l2 value 42)
+   (set l3 value 1337)
+   (call p1 sum)
+  )
+ )
+)

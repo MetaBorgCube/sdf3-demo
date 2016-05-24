@@ -1,0 +1,52 @@
+(program
+ (classes
+  (class Fib extends Object
+   (fields
+    (Num n)
+    (Num fib)
+    (Fib fibn-1)
+   )
+   (methods
+    (method Fib initialize ()
+     (if (num= (get this n) 0)
+         (do
+          (set this fib 0)
+          this
+         )
+         (do 
+          (if (num= (get this n) 1)
+             (set this fib 1)
+             (set this fib -1)
+          )
+          (set this fibn-1 (new Fib))
+          (set (get this fibn-1) n (- (get this n) 1))
+          (call (get this fibn-1) initialize)
+         )
+     )
+    )
+    (method Fib getn-1 ()
+     (get this fibn-1)
+    )
+    (method Num calculate ()
+     (if (not (num= (get this fib) (- 1)))
+         (get this fib)
+         (set this fib
+          (+
+           (call (get this fibn-1) calculate)
+           (call (call (get this fibn-1) getn-1) calculate)
+          )
+         )
+     )
+    )
+   )
+  )
+ )
+ (let
+  ((Fib fib (new Fib))) 
+  (do
+   (set fib n 10)
+   (call fib initialize)
+   (call fib calculate)
+  )
+ )
+)

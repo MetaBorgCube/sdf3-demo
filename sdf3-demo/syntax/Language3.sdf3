@@ -1,0 +1,111 @@
+module Language3
+
+imports Common
+
+context-free start-symbols Start
+
+context-free syntax
+  
+  Start = Program
+  
+  Program.Program = [
+  	program 
+  	
+  	[{Class "\n\n"}*] 
+  	
+  	run 
+  	  [Expr]
+  ]
+
+  Class.Class = [
+    class [ClassName] extends [ClassName] {
+       [{Field "\n"}*]
+       [{Method "\n\n"}*]
+    }
+  ]
+
+  Field.Field = [[Type] [FieldName]]
+
+  Method.Method =  [
+  	[Type] [MethodName]([{Param ", "}*]) {
+  		[Expr]
+  	}
+  ]
+  	
+  Param.Param = [[Type] [VarName]]
+
+  Expr       = [([Expr])] {bracket}
+  Expr.True  = [true]
+  Expr.False = [false]
+  Expr.Num   = INT
+  Expr.Var   = VarName   
+  Expr.Min   = [- [Expr]]
+  Expr.Not   = [not [Expr]]
+  Expr.Add   = [[Expr] + [Expr]] {left}
+  Expr.Mul   = [[Expr] * [Expr]] {left} 
+  Expr.Sub   = [[Expr] - [Expr]] {left}
+  Expr.And   = [[Expr] and [Expr]] {assoc}
+  Expr.Or    = [[Expr] or [Expr]] {assoc}
+  Expr.Eq    = [[Expr] == [Expr]] {non-assoc}
+  
+  Expr.If    = [
+  	if([Expr]) 
+  	  [Expr] 
+  	else 
+  	  [Expr]
+  ] {right}
+  
+  Expr.Do    = [
+  	{ 
+  		[{Expr ";\n"}*] 
+  	}
+  ]
+
+  Expr.Let   = [
+  	let [{Bind "\n"}*] 
+  	 in [Expr]
+  ]
+  
+  Bind.Bind  = [[Type] [VarName] = [Expr]]
+    
+  Expr.Get   = [[Expr].[FieldName]]
+  Expr.Set   = [[Expr].[FieldName] = [Expr]]
+  Expr.Call  = [[Expr].[MethodName]([{Expr ", "}*])]
+
+  Expr.New   = [new [ClassName]]
+  Expr.This  = [this]
+  Expr.Null  = [null [ClassName]]
+ 
+  Type.NumT   = [Num]
+  Type.BoolT  = [Bool]
+  Type.ClassT = ClassName
+     
+  VarName    = ID
+  ClassName  = ID
+  FieldName  = ID 
+  MethodName = ID
+  
+  ID = [Num] {reject}
+  ID = [Bool] {reject}
+  VarName   = [true] {reject}
+  VarName   = [false] {reject}
+  VarName   = [this] {reject} 
+  VarName   = [new] {reject}
+
+context-free priorities
+
+  {Expr.Get Expr.Call}
+  > {Expr.Not Expr.Min} 
+  > Expr.Mul 
+  > {left: Expr.Add Expr.Sub} 
+  > Expr.Eq 
+  > Expr.And 
+  > Expr.Or
+  > Expr.Set
+  > {Expr.If Expr.Let}
+  
+lexical restrictions
+
+  "new" -/- [a-zA-Z]
+  
+  

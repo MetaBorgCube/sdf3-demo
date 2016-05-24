@@ -1,0 +1,51 @@
+Plan
+
+* Spoofax Language Workbench = tool for making languages 
+* Syntax + Semantics => IDE + interpreter
+* Today: syntax => language-aware editor
+* Syntax defined using context-free grammar ++
+
+* original PaplJ grammar
+
+* conversion to SDF3
+* SDF3 productions
+* abstract syntax trees (terms)
+* algebraic signature
+
+* convert to proper syntax (without all the parentheses)
+
+* lexical ambiguities
+
+* ambiguity
+* declarative disambiguation rules
+* pretty-printing (unparsing)
+
+
+
+
+
+
+In this lecture I will demonstrate the use of 
+
+* context-free grammars Spoofax
+
+Given a context-free grammar, 
+
+Spoofax generates a language-aware editor that
+
+* checks syntactic correctness 
+* provides syntax highlighting
+* produces an abstract syntax tree 
+
+We will interactively 
+
+* construct a grammar for a small language 
+
+and on the way encounter topics such as 
+
+* ambiguity
+* declarative disambiguation rules
+* pretty-printing (unparsing)
+* completion
+
+

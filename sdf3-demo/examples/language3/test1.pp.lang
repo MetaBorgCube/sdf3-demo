@@ -1,0 +1,12 @@
+program
+
+class A extends Object {
+   Num a A b
+}
+
+class B extends A {
+   Num a A b
+}
+
+run
+  54

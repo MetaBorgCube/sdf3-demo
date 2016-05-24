@@ -1,0 +1,11 @@
+(program
+ (classes
+  (class A extends Object
+   (fields)
+   (methods
+    (method Num x () (+ 5 (if (num= (- 5) 4) 77 99)))
+   )
+  )
+ )
+ 54
+)

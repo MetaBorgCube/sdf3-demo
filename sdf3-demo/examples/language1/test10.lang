@@ -1,0 +1,17 @@
+(program
+ (classes
+  (class A extends Object
+   (fields)
+   (methods
+    (method A overriding ((A in)) this)
+   )
+  )
+  (class B extends A
+   (fields)
+   (methods
+    (method A overriding ((A in)) this)
+   )
+  )
+ )
+ 42
+)

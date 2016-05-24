@@ -1,0 +1,30 @@
+(program
+ (classes
+  (class Counter extends Object
+   (fields
+    (Num count)
+   )
+   (methods
+    (method Num count ()
+     (set this count (+ (get this count) 1))
+    )
+   )
+  )
+ )
+ (let
+  (
+   (Counter c1 (new Counter))
+   (Counter c2 (new Counter))
+   (Counter c3 (new Counter))
+  ) 
+  (do
+   (call c1 count)
+   (call c2 count)
+   (call c1 count)
+   (call c2 count)
+   (call c3 count)
+   (call c1 count)
+   (* (get c1 count) (get c2 count))
+  )
+ )
+)

@@ -1,0 +1,8 @@
+program
+
+
+run
+  3 + if(true)
+    6
+  else
+    false

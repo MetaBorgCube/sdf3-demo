@@ -1,0 +1,17 @@
+program
+  class A extends Object {
+    Num a
+    A b
+  
+  }
+
+  class B extends A {
+    Num a
+    A b
+    
+    B foo(A a) {
+      a + 2 + 4 * 9 - 3 and 4
+    }
+  
+  }
+run 54
