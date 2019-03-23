@@ -1,0 +1,171 @@
+module lean
+
+imports Common
+
+context-free start-symbols Term
+
+context-free syntax
+  Term.Var  = [[ID]]
+  Term      = [([Term])] {bracket}
+  Term.Ascr = [[Term] : [Term]] {left}
+  Term.App  = [[Term] [Term]] {left}
+  Term.Fun  = [[Term] -> [Term]] {right}
+    
+  Term.Elab = [[Term] => [Term]] {non-assoc}
+  
+ context-free priorities 
+     Term.App
+   > Term.Fun
+   > Term.Ascr
+   > Term.Elab
+   
+   
+//context-free syntax
+//  Term.Var  = [[ID]]
+//  Term      = [([Term])] {bracket}
+//  Term.Ascr = [[Term] : [Term]] {left}
+//  Term.App  = [[Term] [Term]] {left}
+//  Term.Fun  = [[Term] -> [Term]] {right}
+//  
+//  Term.Elab = [[Term] => [Term]] {non-assoc}
+//  
+// context-free priorities 
+//     Term.App
+//   > Term.Fun
+//   > Term.Ascr
+//   > Term.Elab
+   
+//context-free syntax
+//  Term.Var  = [[ID]]
+//  Term      = [([Term])] {bracket}
+//  Term.Ascr = [[Term] : [Term]] {left}
+//  Term.App  = [[Term] [Term]] {left}
+//  Term.Fun  = [[Term] -> [Term]] {right}
+//  
+// context-free priorities 
+//     Term.Ascr
+//   > Term.App
+//   > Term.Fun
+   
+//  term ::= var
+//       | term term
+//       | "(" term ")"
+//       | term ":" term
+//       | term "->" term
+//       | ( "(" var+ ":" term ")" )+ "->" term
+   
+//context-free syntax
+//  Term.Var  = [[ID]]
+//  Term      = [([Term])] {bracket}
+//  Term.Ascr = [[Term] :: [Term]] {left}
+//  Term.App  = [[Term] [Term]] {left}
+//  Term.Fun  = [[Args] -> [Term]] {right}
+//  
+//  Args.Arg  = [[Arg]] 
+//  Args.Args = [[Args] [Term]] 
+//  
+//  Arg.Arg   = [[Term]]
+//  
+// context-free priorities 
+//     Term.Ascr
+//   > Term.App
+//   > Term.Fun
+   
+//context-free syntax
+//  Term.Var  = [[ID]]
+//  Term      = [([Term])] {bracket}
+//  Term.Ascr = [[Term] :: [Term]] {left}
+//  Term.App  = [[Term] [Term]] {left}
+//  Term      = Fun
+//  Fun.Fun1  = [[Arg] [Fun]] {right}
+//  Fun.Fun2  = [[Arg] -> [Term]]
+//  Arg.Arg   = [([ID+] : [Term])]
+//  Args.Arg  = [[Term]]
+//  
+// context-free priorities 
+//     Term.Ascr
+//   > Term.App
+//   > Fun.Fun2
+   
+//context-free syntax
+//  Term.Var  = [[ID]]
+//  Term      = [([Term])] {bracket}
+//  Term.Ascr = [[Term] :: [Term]] {left}
+//  Term.App  = [[Term] [Term]] {left}
+//  Term.Fun  = [[Args] -> [Term]] {right}
+//  Args.Args = [[Arg+]] {longest-match}
+//  Arg.Arg   = [([ID+] : [Term])]
+//  Args.Arg  = [[Term]]
+//  
+// context-free priorities 
+//     Term.Ascr
+//   > Term.App
+//   > Term.Fun
+   
+
+//context-free syntax
+//  Term.Var  = [[ID]]
+//  Term      = [([Term])] {bracket}
+//  Term      = Fun
+//  Term      = DFun
+//  Term      = App
+//  Term      = Ascr
+//  App.App   = [[Term] [Term]] {left}
+//  Ascr.Ascr = [[Term] : [Term]] {left}
+//  Fun.Fun   = [[Arg] -> [Term]] {right}
+//  DFun.DFun = [[DArg+] -> [Term]] {right}
+//  DArg.Arg  = [([ID+] : [Term])]
+//  Arg       = [[Term]]
+//
+//context-free syntax
+//  Arg       = [[DArg]] {reject}
+//  Fun       = [[DFun]] {reject}
+//  App       = [([Ascr]) [DFun]] {reject} 
+//  
+// context-free priorities 
+//     Ascr.Ascr
+//   > App.App
+//   > {right: Fun.Fun DFun.DFun}
+   
+//context-free syntax
+//  Term.Var  = [[ID]]
+//  Term      = [([Term])] {bracket}
+//  Term      = Fun
+//  Term      = DFun
+//  Term      = App
+//  Term      = Ascr
+//  App.App   = [[Term] [Term]] {left}
+//  Ascr.Ascr = [[Term] : [Term]] {left}
+//  Fun.Fun   = [[Term] -> [Term]] {right}
+//  DFun.DFun = [[Arg+] -> [Term]] {right}
+//  Arg.Arg   = [([ID+] : [Term])]
+//
+//context-free syntax
+//  Fun       = DFun {reject}
+//  App       = [([Ascr]) [DFun]] {reject} 
+//  
+// context-free priorities 
+//     Ascr.Ascr
+//   > App.App
+//   > {right: Fun.Fun DFun.DFun}
+   
+//context-free syntax
+//  
+//  Start = <<Term>>
+//  
+//  Term.Var = <<ID>>
+//  Term.App = <<Term> <Term>> {left}
+//  Term     = <(<Term>)> {bracket}
+//  Term.Ascr = <<Term> : <Term>> {left}
+//  Term.Fun  = [[Term] -> [Term]] {right}
+//  Term.DFun = [[Arg+] -> [Term]] {right}
+//  
+//  Arg.Arg = [([ID+] : [Term])]
+//  
+// context-free priorities 
+// 
+//   Term.Ascr > Term.App 
+//   > {right: Term.Fun Term.DFun}
+
+  
+  

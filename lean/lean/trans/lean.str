@@ -1,0 +1,23 @@
+module lean
+
+imports
+  completion/completion
+  pp
+  outline
+  elaborate
+
+rules // Debugging
+  
+  debug-show-aterm:
+    (node, _, _, path, project-path) -> (filename, result)
+    with
+      filename := <guarantee-extension(|"aterm")> path
+    ; result   := node
+
+  editor-elaborate:
+    (node, _, _, path, project-path) -> (filename, result)
+    with
+      filename := <guarantee-extension(|"elab.lean")> path
+    ; result   := <elaborate-all; pp-lean-string>node
+
+    

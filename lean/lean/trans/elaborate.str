@@ -1,0 +1,13 @@
+module elaborate
+
+imports signatures/lean-sig
+
+rules 
+
+elaborate-all = innermost(elaborate)
+
+elaborate :
+  Fun(App(e1, Ascr(x, S)), e2) ->
+  Fun(e1, Fun(Ascr(x, S), e2))
+  
+  
